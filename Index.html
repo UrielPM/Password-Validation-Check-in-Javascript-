@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Password Validation Check</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src='main.js'></script>
+</head>
+<body>
+    <div class="box">
+
+        <div class="validation">
+            <p> Para proteger tu cuenta asegúrate de que tu contraseña considere</p>
+            <ul>
+                <li id="length">Mínimo 16 caracteres |Máximo 20 caracteres</li>
+                <li id="lower">Letras minúsculas (a-z) no secuenciales (abc)</li>
+                <li id="upper">Letras mayúsculas (A-Z) no secuenciales (ABC)</li>
+                <li id="number">Números (0-9) no secuenciales (111, 123)</li>
+                <li id="special">Contener al menos un carácter especial: !@#$%&*)</li>
+            </ul>
+        </div>
+        <br>
+
+        <div class="inputBox">
+            <input type="password" id="pswrd" 
+            placeholder="contraseña" onkeyup="checkPassword(this.value)">
+            <span id="toggleBtn"></span>
+        </div>
+        <br>
+        <div class="inputBox">
+            <input type="password" id="pswrd" 
+            placeholder="contraseña" onkeyup="checkPassword(this.value)">
+            <span id="toggleBtn"></span>
+        </div>
+
+
+   
+        
+    </div>
+    <script>
+        let pswrd = document.getElementById('pswrd');
+        let toggleBtn = document.getElementById('toggleBtn');
+
+
+        let lowerCase = document.getElementById('lower');
+        let upperCase = document.getElementById('upper');
+        let digit =  document.getElementById('number');
+        let specialChar = document.getElementById('special');
+        let minLength = document.getElementById('length');
+
+        function checkPassword(data){
+        const lower = new  RegExp('(?=.*[a-z])');
+        const upper = new  RegExp('(?=.*[A-Z])');
+        const number = new  RegExp('(?=.*\\d)');
+        const special = new  RegExp('(?=.*\\W)|(?=.*_)');
+        const length = new  RegExp('(?=.{16,})');  
+
+        //lower case validation check
+        if(lower.test(data)){
+            lowerCase.classList.add('valid');
+        }else {
+            lowerCase.classList.remove('valid');
+        }
+       //upper validation check
+        if(upper.test(data)){
+            upperCase.classList.add('valid');
+        }else {
+            upperCase.classList.remove('valid');
+        }
+       //Number validation check
+        if(number.test(data)){
+            digit.classList.add('valid');
+        }else {
+            digit.classList.remove('valid');
+        }
+         //special  charater validation check
+        if(special.test(data)){
+            specialChar.classList.add('valid');
+        }else {
+            specialChar.classList.remove('valid');
+        }
+
+         //Minimum 8 validation check
+        if(length.test(data)){
+            minLength.classList.add('valid');
+        }else {
+            minLength.classList.remove('valid');
+        }
+
+
+        
+        
+
+        }
+
+
+        
+
+
+
+        //Show hide password
+        toggleBtn.onclick = function(){
+            if(pswrd.type === 'password'){
+                pswrd.setAttribute('type', 'text');
+                toggleBtn.classList.add('hide');
+            } else{
+                pswrd.setAttribute('type', 'password');
+                toggleBtn.classList.remove('hide');
+            }
+        }
+
+    </script>
+    
+</body>
+</html>
